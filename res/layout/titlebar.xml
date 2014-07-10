@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+<LinearLayout android:gravity="center_vertical" 
+    android:layout_gravity="center" 
+    android:orientation="horizontal" 
+    android:id="@+id/linToolBar" 
+    android:layout_width="fill_parent" 
+    android:layout_height="@dimen/bar_height"
+    android:layout_alignParentTop="true"
+    android:background="#3186c7">
+     
+</LinearLayout>
+</merge>
