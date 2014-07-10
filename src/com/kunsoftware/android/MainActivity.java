@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -19,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
   
@@ -30,7 +32,7 @@ public class MainActivity extends Activity  {
 	private PagerTitleStrip mPagerTitleStrip2;
 	private	int pagerPosition = 0;
    
-	private List<View> listViews; // Tab页面列表
+	private List<TextView> listViews = new ArrayList<TextView>(); // Tab页面列表
     private ImageView cursor;// 动画图片
     private TextView t1, t2, t3;// 页卡头标
     private int offset = 0;// 动画图片偏移量
@@ -41,6 +43,9 @@ public class MainActivity extends Activity  {
 	t1 = (TextView) findViewById(R.id.text1);
 	t2 = (TextView) findViewById(R.id.text2);
  	t3 = (TextView) findViewById(R.id.text3);
+ 	listViews.add(t1);
+ 	listViews.add(t2);
+ 	listViews.add(t3);
  
 	t1.setOnClickListener(new MyOnClickListener(0));
 	t2.setOnClickListener(new MyOnClickListener(1));
@@ -52,8 +57,14 @@ public class MainActivity extends Activity  {
      * 初始化动画
 */
     private void InitImageView() {
-        cursor = (ImageView) findViewById(R.id.cursor);
-        bmpW = 60;// BitmapFactory.decodeResource(getResources(), R.drawable.a).getWidth();// 获取图片宽度
+        cursor = (ImageView) findViewById(R.id.cursor); 
+         
+        LayoutParams cursorPara = cursor.getLayoutParams();
+        cursorPara.width = 210; 
+        cursor.setLayoutParams(cursorPara);  
+        
+        
+        bmpW = 210;// BitmapFactory.decodeResource(getResources(), R.drawable.a).getWidth();// 获取图片宽度
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;// 获取分辨率宽度
@@ -278,6 +289,8 @@ public class MainActivity extends Activity  {
 	            currIndex = position;
 	            animation.setFillAfter(true);// True:图片停在动画结束位置
 	            animation.setDuration(300);
+	            
+	            
 	            cursor.startAnimation(animation);
 	        }  
 	  
@@ -331,6 +344,10 @@ public class MainActivity extends Activity  {
             public void onClick(View v)
             {
                 menu.showMenu();
+                View view =  listViews.get(0);
+                LayoutParams para = view.getLayoutParams();
+                
+                Toast.makeText(getApplicationContext(), "Deleted Successfully!" + para.width, Toast.LENGTH_LONG).show();  
             }
         });
         //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, new SampleListFragment()).commit();  
