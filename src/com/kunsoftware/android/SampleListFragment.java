@@ -1,4 +1,4 @@
-package com.example.test2;
+package com.kunsoftware.android;
 
 
 import android.content.Context;
