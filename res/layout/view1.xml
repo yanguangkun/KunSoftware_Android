@@ -4,13 +4,70 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+   <TextView android:background="#eeedf3" 
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"/>
+   
+   <LinearLayout
+        android:id="@+id/tab1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:orientation="horizontal"
+         android:gravity="center|center_vertical" 
+        android:background="@drawable/textlines">
+        
+      <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left"
+             android:text="日志"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"   
+            android:paddingLeft="15dip"        
+            android:textColor="#010101"            
+            android:textSize="16.0sp" />
+       <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right"
+             android:text="2014-01-28"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"   
+            android:paddingRight="15dip"        
+            android:textColor="#010101"            
+            android:textSize="16.0sp" />
+    </LinearLayout>
+    <!-- <TextView android:background="#eeedf3" 
+        android:layout_width="fill_parent"
+        android:layout_height="20dip"/> -->
+    <LinearLayout
+        android:id="@+id/tab2"
+        android:layout_width="fill_parent"
+        android:layout_height="65dip"
+        android:orientation="horizontal"
+         android:gravity="center|center_vertical" 
+        android:background="@drawable/textlines_bottom">
+       
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingLeft="15.dip"
+            android:background="@null"
+            android:textColor="#010101"
+            android:paddingRight="15.dip"
+            android:paddingTop="10dip" >
 
+        <requestFocus />
+    </EditText>
+        
+    </LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="wrap_content"

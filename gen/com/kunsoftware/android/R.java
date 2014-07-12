@@ -133,7 +133,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int bar1_height=0x7f050009;
         public static final int bar_height=0x7f050008;
+        public static final int font_size=0x7f05000a;
         public static final int list_padding=0x7f050006;
         public static final int padding_large=0x7f050004;
         public static final int padding_medium=0x7f050003;
@@ -142,35 +144,43 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int slidingmenu_offset=0x7f050005;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
-        public static final int menucolor=0x7f020001;
-        public static final int shadow=0x7f020002;
+        public static final int home=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int menu=0x7f020002;
+        public static final int menucolor=0x7f020003;
+        public static final int shadow=0x7f020004;
+        public static final int textlines=0x7f020005;
+        public static final int textlines_bottom=0x7f020006;
+        public static final int textlines_bottom2=0x7f020007;
+        public static final int titlecolor=0x7f020008;
     }
     public static final class id {
         public static final int bottomBar=0x7f040006;
-        public static final int button01=0x7f04000f;
+        public static final int button01=0x7f04000e;
         public static final int button02=0x7f040007;
-        public static final int button1=0x7f040014;
-        public static final int cursor=0x7f04000c;
-        public static final int editText1=0x7f040016;
+        public static final int cursor=0x7f04000b;
+        public static final int editText1=0x7f040018;
+        public static final int editText2=0x7f040016;
         public static final int fullscreen=0x7f040003;
+        public static final int imageMenu=0x7f040013;
         public static final int left=0x7f040000;
-        public static final int linToolBar=0x7f040013;
+        public static final int linToolBar=0x7f040012;
+        public static final int linToolBar1=0x7f040014;
         public static final int margin=0x7f040002;
-        public static final int menu_frame=0x7f04000e;
+        public static final int menu_frame=0x7f04000d;
         public static final int none=0x7f040004;
-        public static final int pagertitle=0x7f040015;
+        public static final int pagertitle=0x7f040017;
         public static final int right=0x7f040001;
-        public static final int row_icon=0x7f040010;
-        public static final int row_title=0x7f040011;
+        public static final int row_icon=0x7f04000f;
+        public static final int row_title=0x7f040010;
         public static final int selected_view=0x7f040005;
-        public static final int slidingmenumain=0x7f040012;
+        public static final int slidingmenumain=0x7f040011;
         public static final int tab1=0x7f040008;
+        public static final int tab2=0x7f040015;
         public static final int text1=0x7f040009;
         public static final int text2=0x7f04000a;
-        public static final int text3=0x7f04000b;
-        public static final int toggleButton1=0x7f040017;
-        public static final int viewpager=0x7f04000d;
+        public static final int toggleButton1=0x7f040019;
+        public static final int viewpager=0x7f04000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;

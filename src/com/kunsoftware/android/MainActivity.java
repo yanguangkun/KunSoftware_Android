@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -13,6 +14,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -31,6 +33,9 @@ public class MainActivity extends Activity  {
 	private ViewPager mViewPager2;
 	private PagerTitleStrip mPagerTitleStrip2;
 	private	int pagerPosition = 0;
+	
+	private ImageView imageMenu;
+	private LinearLayout linToolBar;
    
 	private List<TextView> listViews = new ArrayList<TextView>(); // Tab页面列表
     private ImageView cursor;// 动画图片
@@ -42,36 +47,78 @@ public class MainActivity extends Activity  {
     private void InitTextView() {
 	t1 = (TextView) findViewById(R.id.text1);
 	t2 = (TextView) findViewById(R.id.text2);
- 	t3 = (TextView) findViewById(R.id.text3);
+ 	//t3 = (TextView) findViewById(R.id.text3);
  	listViews.add(t1);
  	listViews.add(t2);
- 	listViews.add(t3);
+ 	//listViews.add(t3);
  
 	t1.setOnClickListener(new MyOnClickListener(0));
 	t2.setOnClickListener(new MyOnClickListener(1));
-	t3.setOnClickListener(new MyOnClickListener(2));
+	//t3.setOnClickListener(new MyOnClickListener(2));
 	
+//	t1.measure(0,0);  
+//    //获取组件宽度  
+//    int width = t1.getMeasuredWidth();  
+//    //获取组件高度  
+//    int height = t1.getMeasuredHeight(); 
+//    System.out.println(height);
+    
+//    int w = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED); 
+//    int h = View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED); 
+//    t1.measure(w, h); 
+//    int height1 =t1.getMeasuredHeight(); 
+//    int width1 =t1.getMeasuredWidth(); 
+    
+//    LayoutParams t1Para = t1.getLayoutParams();
+//    t1Para.height = height1; 
+//    t1Para.width = width1;
+//    t1.setLayoutParams(t1Para); 
+//   
+//    Toast.makeText(getApplicationContext(), "\n"+height+","+width, Toast.LENGTH_LONG).show();  
+//    
+//    ViewTreeObserver vto = t1.getViewTreeObserver();  
+//    vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {  
+//        public boolean onPreDraw() {  
+//            int height = t1.getMeasuredHeight();  
+//            int width = t1.getMeasuredWidth();  
+//          
+//            Toast.makeText(getApplicationContext(), "\n"+height+","+width, Toast.LENGTH_LONG).show();  
+//            return true;  
+//        }  
+//    });  
+    
     }
     
     /**
      * 初始化动画
 */
     private void InitImageView() {
+    	
+    	   
+        
+       
+        
+
         cursor = (ImageView) findViewById(R.id.cursor); 
-         
-        LayoutParams cursorPara = cursor.getLayoutParams();
-        cursorPara.width = 210; 
-        cursor.setLayoutParams(cursorPara);  
-        
-        
-        bmpW = 210;// BitmapFactory.decodeResource(getResources(), R.drawable.a).getWidth();// 获取图片宽度
+       // BitmapFactory.decodeResource(getResources(), R.drawable.a).getWidth();// 获取图片宽度
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;// 获取分辨率宽度
-        offset = (screenW / 3 - bmpW) / 2;// 计算偏移量
+        
+        bmpW = screenW / 2;
+        offset = (screenW / 2 - bmpW) / 2;// 计算偏移量
         Matrix matrix = new Matrix();
         matrix.postTranslate(offset, 0);
         cursor.setImageMatrix(matrix);// 设置动画初始位置
+        
+        int pix = getResources().getDimensionPixelSize(R.dimen.bar_height);
+        
+        
+        LayoutParams cursorPara = cursor.getLayoutParams();
+        cursorPara.width = screenW / 2; 
+        cursor.setLayoutParams(cursorPara);  
+        
+        System.out.println(pix);
     }
     
     /**
@@ -100,7 +147,14 @@ public class MainActivity extends Activity  {
   
         //初始化滑动菜单  
         initSlidingMenu();  
+        Toast.makeText(getApplicationContext(), "Deleted Successfully!" + px2dip(getApplicationContext(),90), Toast.LENGTH_LONG).show();  
+        
     }  
+	
+	public static int px2dip(Context context, float pxValue){ 
+        final float scale = context.getResources().getDisplayMetrics().density; 
+        return (int)(pxValue / scale + 0.5f); 
+	} 
   
     /** 
      * 初始化滑动菜单 
@@ -115,7 +169,16 @@ public class MainActivity extends Activity  {
         
         mViewPager = (ViewPager)findViewById(R.id.viewpager);
         mPagerTitleStrip = (PagerTitleStrip)findViewById(R.id.pagertitle);
-        LinearLayout tabLine = (LinearLayout)findViewById(R.id.tab1);
+        imageMenu = (ImageView)findViewById(R.id.imageMenu);
+        linToolBar = (LinearLayout)findViewById(R.id.linToolBar);
+        LayoutParams para = linToolBar.getLayoutParams();
+        Toast.makeText(getApplicationContext(), "height=" + para.height, Toast.LENGTH_LONG).show();  
+        
+        linToolBar.measure(0,0);  
+      //获取组件宽度  
+      int width = linToolBar.getMeasuredWidth();  
+      //获取组件高度  
+      int height = linToolBar.getMeasuredHeight(); 
        
 //        TextView textView = new TextView(this);
 //        textView.setText("tab1"); 
@@ -340,7 +403,7 @@ public class MainActivity extends Activity  {
         button.setText("测试");
          
         
-        button2.setOnClickListener(new Button.OnClickListener(){ 
+        imageMenu.setOnClickListener(new Button.OnClickListener(){ 
             public void onClick(View v)
             {
                 menu.showMenu();
@@ -348,6 +411,18 @@ public class MainActivity extends Activity  {
                 LayoutParams para = view.getLayoutParams();
                 
                 Toast.makeText(getApplicationContext(), "Deleted Successfully!" + para.width, Toast.LENGTH_LONG).show();  
+            }
+        });
+        
+        button2.setOnClickListener(new Button.OnClickListener(){ 
+            public void onClick(View v)
+            {
+            	linToolBar.measure(0,0);  
+                //获取组件宽度  
+                int width = linToolBar.getMeasuredWidth();  
+                //获取组件高度  
+                int height = linToolBar.getMeasuredHeight(); 
+                System.out.println(height);
             }
         });
         //getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, new SampleListFragment()).commit();  

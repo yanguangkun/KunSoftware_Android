@@ -8,9 +8,33 @@
     android:orientation="horizontal" 
     android:id="@+id/linToolBar" 
     android:layout_width="fill_parent" 
-    android:layout_height="@dimen/bar_height"
-    android:layout_alignParentTop="true"
-    android:background="#3186c7">
+    android:layout_height="@dimen/bar_height" 
+   android:background="@drawable/titlecolor"> 
+    <ImageView
+        android:id="@+id/imageMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="10dp"
+        android:src="@drawable/menu" />
+     <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="left"
+            android:paddingLeft="3dip" 
+            android:text="工作日志"
+            android:textColor="#fff"
+            android:textSize="18.0dip" />
+</LinearLayout>
+<LinearLayout android:gravity="center_vertical" 
+    android:layout_gravity="center" 
+    android:orientation="horizontal" 
+    android:id="@+id/linToolBar1" 
+    android:layout_width="fill_parent" 
+    android:layout_height="@dimen/bar1_height" 
+   android:background="#2b8fdb"> 
+    
      
 </LinearLayout>
 </merge>
