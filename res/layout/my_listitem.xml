@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+        android:layout_width="fill_parent" 
+        xmlns:android="http://schemas.android.com/apk/res/android" 
+        android:orientation="horizontal"
+        android:layout_height="wrap_content" 
+        android:id="@+id/MyListItem" 
+        android:paddingBottom="3dip" 
+        android:paddingLeft="10dip">
+        <TextView 
+                android:layout_height="wrap_content" 
+                android:layout_width="90dip" 
+                android:id="@+id/ItemTitle" 
+                android:paddingLeft="10dip"
+                android:textSize="18sp"
+                android:paddingTop="5dip"
+                android:paddingBottom="5dip"
+                android:textColor="#000">
+        </TextView>
+        <TextView 
+                android:layout_height="wrap_content" 
+                android:layout_width="fill_parent" 
+                android:id="@+id/ItemText"
+                android:textSize="16sp"
+                 android:paddingTop="5dip"
+                android:paddingBottom="5dip"
+                android:textColor="#cfcfcf">
+        </TextView>
+</LinearLayout>

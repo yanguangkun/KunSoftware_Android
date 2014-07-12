@@ -4,14 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" >
-
-        <requestFocus />
-    </EditText>
+     <ListView android:layout_width="wrap_content" 
+                  android:layout_height="wrap_content" 
+                  android:divider="#ececec"
+                   android:dividerHeight="1dip"
+                  android:id="@+id/MyListView">
+        </ListView>
 
 </LinearLayout>

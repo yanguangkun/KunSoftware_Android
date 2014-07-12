@@ -62,7 +62,11 @@
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:scaleType="matrix" android:background="#3395e0"/>
-    
+    <ImageView
+        android:id="@+id/cursor12"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+		android:background="#d9d8dd"/>
     
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

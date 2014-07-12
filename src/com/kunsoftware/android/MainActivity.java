@@ -1,6 +1,7 @@
 package com.kunsoftware.android;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,19 +9,19 @@ import android.content.Context;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +29,8 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
   
 public class MainActivity extends Activity  {  
     private SlidingMenu menu;  
-    private ViewPager mViewPager;
-	private PagerTitleStrip mPagerTitleStrip;
-	private ViewPager mViewPager2;
-	private PagerTitleStrip mPagerTitleStrip2;
+    private ViewPager mViewPager; 
+	private ViewPager mViewPager2; 
 	private	int pagerPosition = 0;
 	
 	private ImageView imageMenu;
@@ -39,10 +38,12 @@ public class MainActivity extends Activity  {
    
 	private List<TextView> listViews = new ArrayList<TextView>(); // Tab页面列表
     private ImageView cursor;// 动画图片
+    private ImageView cursor2;// 动画图片
     private TextView t1, t2, t3;// 页卡头标
     private int offset = 0;// 动画图片偏移量
     private int currIndex = 0;// 当前页卡编号
     private int bmpW;// 动画图片宽度
+    private int bmpW2;// 动画图片宽度
 	
     private void InitTextView() {
 	t1 = (TextView) findViewById(R.id.text1);
@@ -100,12 +101,14 @@ public class MainActivity extends Activity  {
         
 
         cursor = (ImageView) findViewById(R.id.cursor); 
+        
        // BitmapFactory.decodeResource(getResources(), R.drawable.a).getWidth();// 获取图片宽度
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int screenW = dm.widthPixels;// 获取分辨率宽度
         
         bmpW = screenW / 2;
+        bmpW2 = screenW / 4;
         offset = (screenW / 2 - bmpW) / 2;// 计算偏移量
         Matrix matrix = new Matrix();
         matrix.postTranslate(offset, 0);
@@ -137,6 +140,19 @@ public class MainActivity extends Activity  {
         }
     };
     
+    public class MyOnClickListener2 implements View.OnClickListener {
+        private int index = 0;
+
+        public MyOnClickListener2(int i) {
+            index = i;
+        }
+
+        @Override
+        public void onClick(View v) {
+        	mViewPager2.setCurrentItem(index);
+        }
+    };
+    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
@@ -155,6 +171,32 @@ public class MainActivity extends Activity  {
         final float scale = context.getResources().getDisplayMetrics().density; 
         return (int)(pxValue / scale + 0.5f); 
 	} 
+	
+	public void listView(View view3) {
+		ListView list = (ListView) view3.findViewById(R.id.MyListView);  
+	      
+	    //生成动态数组，并且转载数据  
+	    ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();  
+	    for(int i=0;i<30;i++)  
+	    {  
+	        HashMap<String, String> map = new HashMap<String, String>();  
+	        map.put("ItemTitle", "张杰");  
+	        map.put("ItemText", "广州大区-销售员");  
+	        mylist.add(map);  
+	    }  
+	    //生成适配器，数组===》ListItem  
+	    SimpleAdapter mSchedule = new SimpleAdapter(this, //没什么解释  
+	                                                mylist,//数据来源   
+	                                                R.layout.my_listitem,//ListItem的XML实现  
+	                                                  
+	                                                //动态数组与ListItem对应的子项          
+	                                                new String[] {"ItemTitle", "ItemText"},   
+	                                                  
+	                                                //ListItem的XML文件里面的两个TextView ID  
+	                                                new int[] {R.id.ItemTitle,R.id.ItemText});  
+	    //添加并且显示  
+	    list.setAdapter(mSchedule); 
+	}
   
     /** 
      * 初始化滑动菜单 
@@ -166,9 +208,9 @@ public class MainActivity extends Activity  {
         
         InitTextView();
         InitImageView();
+       
         
-        mViewPager = (ViewPager)findViewById(R.id.viewpager);
-        mPagerTitleStrip = (PagerTitleStrip)findViewById(R.id.pagertitle);
+        mViewPager = (ViewPager)findViewById(R.id.viewpager); 
         imageMenu = (ImageView)findViewById(R.id.imageMenu);
         linToolBar = (LinearLayout)findViewById(R.id.linToolBar);
         LayoutParams para = linToolBar.getLayoutParams();
@@ -196,10 +238,28 @@ public class MainActivity extends Activity  {
         View view2 = mLi.inflate(R.layout.view2, null);
         View view3 = mLi.inflate(R.layout.view3, null);
         View view4 = mLi.inflate(R.layout.view4, null);
+        View view5 = mLi.inflate(R.layout.view3, null);
+        View view6 = mLi.inflate(R.layout.view3, null);
+        listView(view3);
+        listView(view5);
+        listView(view6);
         
+        cursor2 = (ImageView) view1.findViewById(R.id.cursor1); 
         mViewPager2 = (ViewPager)view1.findViewById(R.id.viewpager);
-        mPagerTitleStrip2 = (PagerTitleStrip)view1.findViewById(R.id.pagertitle);
+        LayoutParams cursorPara = cursor2.getLayoutParams();
+        cursorPara.width = bmpW2; 
+        cursor2.setLayoutParams(cursorPara);  
         
+        TextView t11 = (TextView) view1.findViewById(R.id.text11);
+        TextView t21 = (TextView) view1.findViewById(R.id.text21);
+        TextView t31 = (TextView) view1.findViewById(R.id.text31);
+        TextView t41 = (TextView) view1.findViewById(R.id.text41);
+        
+        t11.setOnClickListener(new MyOnClickListener2(0));
+        t21.setOnClickListener(new MyOnClickListener2(1));
+        t31.setOnClickListener(new MyOnClickListener2(2));
+        t41.setOnClickListener(new MyOnClickListener2(3));
+       
         //每个页面的Title数据
         final ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
@@ -208,6 +268,8 @@ public class MainActivity extends Activity  {
         final ArrayList<View> views2 = new ArrayList<View>();
         views2.add(view3);
         views2.add(view4); 
+        views2.add(view5); 
+        views2.add(view6); 
         
         final ArrayList<String> titles = new ArrayList<String>();
         titles.add("tab1");
@@ -360,8 +422,12 @@ public class MainActivity extends Activity  {
 	    });
 		
 		mViewPager2.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {  
+			
+			private int currIndex2;
 	        @Override  
 	        public void onPageSelected(int position) {  
+	        	
+	        	
 	            /** 
 	             *  setSelectedNavigationItem 方法用于设置ActionBar的聚焦tab .   
 	             *  在接下来我们判断了SLidingMenu的手势力模式， 
@@ -378,6 +444,19 @@ public class MainActivity extends Activity  {
 	                	menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);  
 	                    break;  
 	            }  
+	            
+	           int from = bmpW2  * currIndex2;
+	           int to = bmpW2 * position;
+	            
+				 Animation animation = null;
+				 animation = new TranslateAnimation(from, to, 0, 0);
+				 animation.setFillAfter(true);// True:图片停在动画结束位置
+				 animation.setDuration(300);
+		            
+		            
+				 cursor2.startAnimation(animation);
+		            
+				 currIndex2 = position;
 	        }  
 	  
 	    });  
